@@ -67,7 +67,34 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImport extends CRM_Core_Form
         $this->add('file', 'importSource', ts('Magnet XML file'), [], true);
         $formParameterNames = ['source', 'financialTypeId', 'paymentInstrumentId', 'bankAccountNumberParameter', 'onlyIncome', 'importSource'];
         $this->assign('parameterNames', $formParameterNames);
+        $this->addButtons([
+            [
+                'type' => 'submit',
+                'name' => E::ts('Submit'),
+                'isDefault' => true,
+            ],
+        ]);
         parent::buildQuickForm();
+    }
+
+    /**
+     * If your form requires special validation, add one or more callbacks here
+     */
+    public function addRules()
+    {
+        $this->addFormRule(['CRM_MagnetXmlImport_Form_MagnetXMLImport', 'fileExtension']);
+    }
+    /**
+     * Accept only xml files.
+     */
+    public static function fileExtension($values, $files)
+    {
+        $errors = [];
+        $validTypes = ['text/xml', 'application/xml'];
+        if (array_search($files['importSource']['type'], $validTypes) === false) {
+            $errors['importSource'] = E::ts('Only XML files allowed.');
+        }
+        return empty($errors) ? true : $errors;
     }
 
     /**
