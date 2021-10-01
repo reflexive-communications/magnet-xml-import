@@ -47,7 +47,7 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImport extends CRM_Core_Form
         $fields = CRM_Core_BAO_UFField::getAvailableFields($this->_gid, $defaults);
         $contactParamNames = ['Contact', 'Individual'];
         $paramOptions = [];
-        foreach($fields as $k => $value) {
+        foreach ($fields as $k => $value) {
             if (array_search($k, $contactParamNames) === false) {
                 continue;
             }

@@ -98,7 +98,6 @@ class CRM_MagnetXmlImport_Service
         // Still not found. Create a brand new contact based on $contactData
         $contact = civicrm_api3('Contact', 'create', $contactData);
         return $contact['id'];
-
     }
 
     /*
@@ -153,7 +152,7 @@ class CRM_MagnetXmlImport_Service
     {
         try {
             $contribution = \Civi\Api4\Contribution::create(false);
-            foreach($params as $key => $value) {
+            foreach ($params as $key => $value) {
                 $contribution = $contribution->addValue($key, $value);
             }
             $contribution->execute();
