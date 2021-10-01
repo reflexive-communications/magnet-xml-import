@@ -1,29 +1,25 @@
 # magnet-xml-import
 
-![Screenshot](/images/screenshot.png)
-
-(*FIXME: In one or two paragraphs, describe what the extension does and why one would download it. *)
+This extension lets you import contribution transactions from Magnet XML. It provides an administration interface where you can set the parameters of the contributions.
 
 The extension is licensed under [AGPL-3.0](LICENSE.txt).
 
+## Administration interface
+
+- Screenshot
+- Describe the parameters
+- Default values
+
+## How does it work
+
+- Data mapping
+- Parameter based behaviour
+- Contact mapping is based on the bank account number
+
 ## Requirements
 
-* PHP v7.2+
-* CiviCRM (*FIXME: Version number*)
-
-## Installation (Web UI)
-
-Learn more about installing CiviCRM extensions in the [CiviCRM Sysadmin Guide](https://docs.civicrm.org/sysadmin/en/latest/customize/extensions/).
-
-## Installation (CLI, Zip)
-
-Sysadmins and developers may download the `.zip` file for this extension and
-install it with the command-line tool [cv](https://github.com/civicrm/cv).
-
-```bash
-cd <extension-dir>
-cv dl magnet-xml-import@https://github.com/FIXME/magnet-xml-import/archive/master.zip
-```
+* PHP v7.3+
+* CiviCRM 5.37+
 
 ## Installation (CLI, Git)
 
@@ -34,11 +30,3 @@ install it with the command-line tool [cv](https://github.com/civicrm/cv).
 git clone https://github.com/FIXME/magnet-xml-import.git
 cv en magnet_xml_import
 ```
-
-## Getting Started
-
-(* FIXME: Where would a new user navigate to get started? What changes would they see? *)
-
-## Known Issues
-
-(* FIXME *)
