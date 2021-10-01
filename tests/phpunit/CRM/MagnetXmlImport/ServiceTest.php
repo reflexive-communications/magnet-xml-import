@@ -19,37 +19,41 @@ use Civi\Test\TransactionalInterface;
  *
  * @group headless
  */
-class CRM_MagnetXmlImport_ServiceTest extends \PHPUnit\Framework\TestCase implements HeadlessInterface, HookInterface, TransactionalInterface {
-
-  public function setUpHeadless() {
-    // Civi\Test has many helpers, like install(), uninstall(), sql(), and sqlFile().
-    // See: https://docs.civicrm.org/dev/en/latest/testing/phpunit/#civitest
-    return \Civi\Test::headless()
+class CRM_MagnetXmlImport_ServiceTest extends \PHPUnit\Framework\TestCase implements HeadlessInterface, HookInterface, TransactionalInterface
+{
+    public function setUpHeadless()
+    {
+        // Civi\Test has many helpers, like install(), uninstall(), sql(), and sqlFile().
+        // See: https://docs.civicrm.org/dev/en/latest/testing/phpunit/#civitest
+        return \Civi\Test::headless()
       ->installMe(__DIR__)
       ->apply();
-  }
+    }
 
-  public function setUp() {
-    parent::setUp();
-  }
+    public function setUp()
+    {
+        parent::setUp();
+    }
 
-  public function tearDown() {
-    parent::tearDown();
-  }
+    public function tearDown()
+    {
+        parent::tearDown();
+    }
 
-  /**
-   * Example: Test that a version is returned.
-   */
-  public function testWellFormedVersion() {
-    $this->assertNotEmpty(E::SHORT_NAME);
-    $this->assertRegExp('/^([0-9\.]|alpha|beta)*$/', \CRM_Utils_System::version());
-  }
+    /**
+     * Example: Test that a version is returned.
+     */
+    public function testWellFormedVersion()
+    {
+        $this->assertNotEmpty(E::SHORT_NAME);
+        $this->assertRegExp('/^([0-9\.]|alpha|beta)*$/', \CRM_Utils_System::version());
+    }
 
-  /**
-   * Example: Test that we're using a fake CMS.
-   */
-  public function testWellFormedUF() {
-    $this->assertEquals('UnitTests', CIVICRM_UF);
-  }
-
+    /**
+     * Example: Test that we're using a fake CMS.
+     */
+    public function testWellFormedUF()
+    {
+        $this->assertEquals('UnitTests', CIVICRM_UF);
+    }
 }
