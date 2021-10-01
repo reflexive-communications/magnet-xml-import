@@ -48,7 +48,7 @@ A successful form submission, triggers the execution of the Magnet XML import se
 
 First it reads the file and loads it as XML object. The all parameter of the stats is the sum of the `Tranzakcio` tags. The import process iterates over the `Tranzakcio` tags and handles them one by one.
 
-The Transformer class is responsible for the data transformation. It extracts and transforms the necessary contact and the contribution data from the transaction XML object.
+The Transformer class is responsible for the data transformation. It extracts and transforms the necessary contact and the contribution data from the transaction XML object. The data extraction was based on existing implementation and not on documentations.
 
 When the `Only income` is set and the `total_amount` in the transformed contribution is not a positive number, it updates the skipped stat and continues the execution with the next transaction. The execution also continues with the next transaction if the current one is a duplication. In this case the duplication stat is increased. The transaction identifier is checked.
 
