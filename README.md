@@ -20,7 +20,7 @@ The selected `Payment method` will be set as the payment\_instrument\_id of the 
 
 The selected `Bank Account` will be used for the contact identification. This contact parameter has to store the bank account id of the contact. You can choose from the contact parameters provided bz the system. The default value is `custom_1` custom parameter. Required.
 
-When the `Only income` checkbox is checked, the negative transactions will be skipped during the import process. The number of skipped transactions will be shown in the info popup after the import execution. By default it is `checked`. Required.
+When the `Only income` checkbox is checked, the negative transactions will be skipped during the import process. The number of skipped transactions will be shown in the info popup after the import execution. By default it is `checked`.
 
 The `Magnet XML file` is the upload field for the XML. It does not have default value. Required.
 
