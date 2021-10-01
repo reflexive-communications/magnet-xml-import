@@ -102,13 +102,11 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImport extends CRM_Core_Form
      */
     public function postProcess()
     {
-        $config = [
-            'source' => $this->_submitValues['source'],
-            'financialTypeId' => $this->_submitValues['financialTypeId'],
-            'paymentInstrumentId' => $this->_submitValues['paymentInstrumentId'],
-            'bankAccountNumberParameter' => $this->_submitValues['bankAccountNumberParameter'],
-            'onlyIncome' => $this->_submitValues['onlyIncome'],
-        ];
+        $paramNames = ['source', 'financialTypeId', 'paymentInstrumentId', 'bankAccountNumberParameter', 'onlyIncome'];
+        $config = [];
+        foreach ($paramNames as $name) {
+            $config[$name] = $this->_submitValues[$name];
+        }
         $service = new CRM_MagnetXmlImport_Service($config, $this->_submitFiles['importSource']['tmp_name']);
         $stats = $service->process();
         // print out the import stats.
