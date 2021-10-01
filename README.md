@@ -24,6 +24,24 @@ When the `Only income` checkbox is checked, the negative transactions will be sk
 
 The `Magnet XML file` is the upload field for the XML. It does not have default value. Required.
 
+### The import workflow
+
+- Navigate to the form from the `Contribution > Magnet XML Import` menu.
+
+![admin form](./assets/docs/admin-form.png)
+
+- Change the settings if necessary and upload the Magnet XML file.
+
+![file upload](./assets/docs/admin-xml-upload.png)
+
+- Submit the form.
+
+![submit form](./assets/docs/admin-submit.png)
+
+- Check the statistics.
+
+![import stats](./assets/docs/admin-import-stats.png)
+
 ## How does it work
 
 A successful form submission, triggers the execution of the Magnet XML import service. The Importer application uses the configurations described above and the uploaded XML file and returns detailed import statistics after the execution.
