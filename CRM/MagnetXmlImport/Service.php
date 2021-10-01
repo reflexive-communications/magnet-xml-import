@@ -38,6 +38,11 @@ class CRM_MagnetXmlImport_Service
                 $this->stats['skipped'] = $this->stats['skipped'] + 1;
                 continue;
             }
+            // Duplicate detection. skip the import when the transaction id already exists.
+            if ($this->duplicatedTransaction($contributionData['trxn_id'])) {
+                $this->stats['duplication'] = $this->stats['duplication'] + 1;
+                continue;
+            }
             $contactData = CRM_MagnetXmlImport_Transformer::magnetTransactionToContact($transaction, $this->config['bankAccountNumberParameter']);
             // First get the contact id that is connected to the bank account number.
             // If it fails, log to file and continue with the next transaction.
@@ -45,11 +50,6 @@ class CRM_MagnetXmlImport_Service
                 $contactId = $this->contact($contactData);
             } catch (Exception $e) {
                 $this->raiseError('Failed to get CRM contact to the transaction: '.$e->getMessage());
-                continue;
-            }
-            // Duplicate detection. skip the import when the transaction id already exists.
-            if ($this->duplicatedTransaction($contributionData['trxn_id'])) {
-                $this->stats['duplication'] = $this->stats['duplication'] + 1;
                 continue;
             }
             // Create the contribution.
