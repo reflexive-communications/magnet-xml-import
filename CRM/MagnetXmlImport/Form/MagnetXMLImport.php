@@ -102,6 +102,29 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImport extends CRM_Core_Form
      */
     public function postProcess()
     {
+        $config = [
+            'source' => $this->_submitValues['source'],
+            'financialTypeId' => $this->_submitValues['financialTypeId'],
+            'paymentInstrumentId' => $this->_submitValues['paymentInstrumentId'],
+            'bankAccountNumberParameter' => $this->_submitValues['bankAccountNumberParameter'],
+            'onlyIncome' => $this->_submitValues['onlyIncome'],
+        ];
+        $service = new CRM_MagnetXmlImport_Service($config, $this->_submitFiles['importSource']['tmp_name']);
+        $stats = $service->process();
+        // print out the import stats.
+        $msgHtml = '<ul>';
+        foreach ($stats as $k => $v) {
+            if ($k === 'errors') {
+                continue;
+            }
+            $msgHtml .= '<li>'.$k.' : '.$v.'</li>';
+        }
+        // Print out the error details.
+        foreach ($stats['errors'] as $e) {
+            $msgHtml .= '<li>'.$e.'</li>';
+        }
+        $msgHtml .= '</ul>';
+        CRM_Core_Session::setStatus(ts('The import has been finished.').$msgHtml, 'Magnet XML Import', 'info');
         parent::postProcess();
     }
 }
