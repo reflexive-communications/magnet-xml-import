@@ -39,7 +39,6 @@ class CRM_MagnetXmlImport_Transformer
             'trxn_id' => (string) $transaction->Tranzakcioszam,
             'total_amount' => (float) $transaction->Osszeg,
             'currency' => (string) $transaction->Osszeg->attributes()['Devizanem'],
-            'message' => (string) $transaction->Kozlemeny,
             'receive_date' => str_replace('.', '', (string) $transaction->Esedekessegnap), // we need 20150131
             'source' => $config['source'],
             'financial_type_id' => $config['financialTypeId'],
