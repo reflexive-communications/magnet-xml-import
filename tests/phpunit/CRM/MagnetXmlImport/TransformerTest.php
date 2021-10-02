@@ -50,7 +50,7 @@ class CRM_MagnetXmlImport_TransformerTest extends \PHPUnit\Framework\TestCase
         $config = [
             'source' => 'test source',
             'financialTypeId' => '1',
-            'payment_instrument_id' => '1',
+            'paymentInstrumentId' => '1',
         ];
         $trxnId = 'trxn003';
         $amount = '1000.00';
@@ -65,7 +65,7 @@ class CRM_MagnetXmlImport_TransformerTest extends \PHPUnit\Framework\TestCase
             'receive_date' => '20160115',
             'source' => $config['source'],
             'financial_type_id' => $config['financialTypeId'],
-            'payment_instrument_id' => $config['payment_instrument_id'],
+            'payment_instrument_id' => $config['paymentInstrumentId'],
             'contribution_status_id' => CRM_MagnetXmlImport_Transformer::CRM_COMPLETED_STATUS_ID,
         ];
         self::assertSame($expected, $transformed);
