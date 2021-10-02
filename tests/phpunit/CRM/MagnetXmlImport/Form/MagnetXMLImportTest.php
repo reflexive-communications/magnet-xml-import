@@ -119,6 +119,19 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImportTest extends \PHPUnit\Framework\Te
      */
     public function testPostProcess()
     {
+        $customGroup = \Civi\Api4\CustomGroup::create(false)
+            ->addValue('title', 'TestCustomGroupPostProcess')
+            ->addValue('extends', 'Contact')
+            ->addValue('is_active', true)
+            ->execute()
+            ->first();
+        \Civi\Api4\CustomField::create()
+            ->addValue('custom_group_id', $customGroup['id'])
+            ->addValue('label', 'bank account number')
+            ->addValue('data_type', 'String')
+            ->addValue('html_type', 'Text')
+            ->addValue('text_length', 40)
+            ->execute();
         $submitValues = [
             'source' => 'Magnet Bank',
             'financialTypeId' => 1,

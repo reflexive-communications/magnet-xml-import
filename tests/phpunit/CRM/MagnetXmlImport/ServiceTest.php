@@ -46,6 +46,7 @@ class CRM_MagnetXmlImport_ServiceTest extends \PHPUnit\Framework\TestCase implem
             ->addValue('label', 'bank account number')
             ->addValue('data_type', 'String')
             ->addValue('html_type', 'Text')
+            ->addValue('text_length', 40)
             ->execute();
         $config = [
             'source' => 'Magnet Bank',

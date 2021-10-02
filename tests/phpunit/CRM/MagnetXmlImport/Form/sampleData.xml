@@ -42,4 +42,11 @@
         <Ellenpartner>Teszt Contact02</Ellenpartner>
         <Ellenszamla>11112222-33334444-55556666</Ellenszamla>
     </Tranzakcio>
+    <Tranzakcio>
+        <Tranzakcioszam>trxn007</Tranzakcioszam>
+        <Osszeg Devizanem="HUF">1000.00</Osszeg>
+        <Esedekessegnap>2016.01.15.</Esedekessegnap>
+        <Ellenpartner>Teszt Contact07</Ellenpartner>
+        <Ellenszamla>HU20 1111 2222 3333 4444 5555 6666 HU20 1111 2222 3333 4444 5555 6666</Ellenszamla>
+    </Tranzakcio>
 </NetBankXML>
