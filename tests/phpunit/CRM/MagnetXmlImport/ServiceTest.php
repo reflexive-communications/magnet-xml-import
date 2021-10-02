@@ -59,11 +59,11 @@ class CRM_MagnetXmlImport_ServiceTest extends \PHPUnit\Framework\TestCase implem
         $service = new CRM_MagnetXmlImport_Service($config, $path);
         $stats = $service->process();
         $expectedStats = [
-            'all' => 6,
+            'all' => 7,
             'imported' => 4,
             'skipped' => 1,
             'duplication' => 1,
-            'errors' => [],
+            'errors' => ['Failed to get CRM contact to the transaction: DB Error: unknown error'],
         ];
         self::assertSame($expectedStats, $stats);
     }
