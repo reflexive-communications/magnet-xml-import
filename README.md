@@ -18,7 +18,7 @@ The selected `Financial Type` will be set as the financial\_type\_id of the cont
 
 The selected `Payment method` will be set as the payment\_instrument\_id of the contribution. You can choose from the payment methods provided by the system. The default value is `EFT`. Required.
 
-The selected `Bank Account` will be used for the contact identification. This contact parameter has to store the bank account id of the contact. You can choose from the contact parameters provided bz the system. The default value is `custom_1` custom parameter. Required.
+The selected `Bank Account` will be used for the contact identification. This contact parameter has to store the bank account id of the contact. You can choose from the contact parameters provided by the system. The default value is `custom_1` custom parameter. Required.
 
 When the `Only income` checkbox is checked, the negative transactions will be skipped during the import process. The number of skipped transactions will be shown in the info popup after the import execution. By default it is `checked`.
 
@@ -44,7 +44,7 @@ The `Magnet XML file` is the upload field for the XML. It does not have default 
 
 ## How does it work
 
-A successful form submission, triggers the execution of the Magnet XML import service. The Importer application uses the configurations described above and the uploaded XML file and returns detailed import statistics after the execution.
+A successful form submission triggers the execution of the Magnet XML import service. The Importer application uses the configurations described above and the uploaded XML file and returns detailed import statistics after the execution.
 
 First it reads the file and loads it as XML object. The all parameter of the stats is the sum of the `Tranzakcio` tags. The import process iterates over the `Tranzakcio` tags and handles them one by one.
 
