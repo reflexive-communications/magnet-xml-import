@@ -8,52 +8,49 @@ use Civi\Test\TransactionalInterface;
 /**
  * FIXME - Add test description.
  *
- * Tips:
- *  - With HookInterface, you may implement CiviCRM hooks directly in the test class.
- *    Simply create corresponding functions (e.g. "hook_civicrm_post(...)" or similar).
- *  - With TransactionalInterface, any data changes made by setUp() or test****() functions will
- *    rollback automatically -- as long as you don't manipulate schema or truncate tables.
- *    If this test needs to manipulate schema or truncate tables, then either:
- *       a. Do all that using setupHeadless() and Civi\Test.
- *       b. Disable TransactionalInterface, and handle all setup/teardown yourself.
- *
  * @group headless
  */
 class CRM_MagnetXmlImport_ServiceTest extends \PHPUnit\Framework\TestCase implements HeadlessInterface, HookInterface, TransactionalInterface
 {
     public function setUpHeadless()
     {
-        // Civi\Test has many helpers, like install(), uninstall(), sql(), and sqlFile().
-        // See: https://docs.civicrm.org/dev/en/latest/testing/phpunit/#civitest
         return \Civi\Test::headless()
       ->installMe(__DIR__)
       ->apply();
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
     }
 
     /**
-     * Example: Test that a version is returned.
+     * Process test case.
      */
-    public function testWellFormedVersion()
+    public function testProcess()
     {
-        $this->assertNotEmpty(E::SHORT_NAME);
-        $this->assertRegExp('/^([0-9\.]|alpha|beta)*$/', \CRM_Utils_System::version());
-    }
-
-    /**
-     * Example: Test that we're using a fake CMS.
-     */
-    public function testWellFormedUF()
-    {
-        $this->assertEquals('UnitTests', CIVICRM_UF);
+        $config = [
+            'source' => 'Magnet Bank',
+            'financialTypeId' => 1,
+            'paymentInstrumentId' => 5,
+            'bankAccountNumberParameter' => 'custom_1',
+            'onlyIncome' => 1,
+        ];
+        $path = __DIR__.'/Form/sampleData.xml';
+        $service = new CRM_MagnetXmlImport_Service($config, $path);
+        $stats = $service->process();
+        $expectedStats = [
+            'all' => 6,
+            'imported' => 4,
+            'skipped' => 1,
+            'duplication' => 1,
+            'errors' => [],
+        ];
+        self::assertSame($expectedStats, $stats);
     }
 }

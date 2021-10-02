@@ -1,17 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <NetBankXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://magnetbank.hu/download/kivonat_sema.xsd">
     <Tranzakcio>
-        <Tranzakcioszam>trxn003</Tranzakcioszam>
+        <Tranzakcioszam>trxn001</Tranzakcioszam>
         <Osszeg Devizanem="HUF">1000.00</Osszeg>
         <Esedekessegnap>2016.01.15.</Esedekessegnap>
         <Ellenpartner>Teszt Contact01</Ellenpartner>
         <Ellenszamla>HU20 1111 2222 3333 4445 0000 0000</Ellenszamla>
     </Tranzakcio>
     <Tranzakcio>
-        <Tranzakcioszam>trxn004</Tranzakcioszam>
+        <Tranzakcioszam>trxn002</Tranzakcioszam>
         <Osszeg Devizanem="HUF">1000.00</Osszeg>
         <Esedekessegnap>2016.01.15.</Esedekessegnap>
         <Ellenpartner>Teszt Contact02</Ellenpartner>
+        <Ellenszamla>HU20 1111 2222 3333 4444 5555 6666</Ellenszamla>
+    </Tranzakcio>
+    <Tranzakcio>
+        <Tranzakcioszam>trxn002</Tranzakcioszam>
+        <Osszeg Devizanem="HUF">1000.00</Osszeg>
+        <Esedekessegnap>2016.01.15.</Esedekessegnap>
+        <Ellenpartner>Teszt Contact02</Ellenpartner>
+        <Ellenszamla>HU20 1111 2222 3333 4444 5555 6666</Ellenszamla>
+    </Tranzakcio>
+    <Tranzakcio>
+        <Tranzakcioszam>trxn004</Tranzakcioszam>
+        <Osszeg Devizanem="HUF">- 1000.00</Osszeg>
+        <Esedekessegnap>2016.01.15.</Esedekessegnap>
+        <Ellenpartner>Teszt Contact04</Ellenpartner>
         <Ellenszamla>HU20 1111 2222 3333 4444 5555 6667</Ellenszamla>
+    </Tranzakcio>
+    <Tranzakcio>
+        <Tranzakcioszam>trxn005</Tranzakcioszam>
+        <Osszeg Devizanem="HUF">1000.00</Osszeg>
+        <Esedekessegnap>2016.01.15.</Esedekessegnap>
+        <Ellenpartner>Teszt Contact02</Ellenpartner>
+        <Ellenszamla>HU20 1111 2222 3333 4444 5555 6666</Ellenszamla>
+    </Tranzakcio>
+    <Tranzakcio>
+        <Tranzakcioszam>trxn006</Tranzakcioszam>
+        <Osszeg Devizanem="HUF">1000.00</Osszeg>
+        <Esedekessegnap>2016.01.15.</Esedekessegnap>
+        <Ellenpartner>Teszt Contact02</Ellenpartner>
+        <Ellenszamla>11112222-33334444-55556666</Ellenszamla>
     </Tranzakcio>
 </NetBankXML>
