@@ -8,6 +8,13 @@
   <filter>
     <whitelist>
       <directory suffix=".php">./</directory>
+      <exclude>
+        <!-- Skip the test directory -->
+        <directory>./tests</directory>
+        <!-- Skip the generated files -->
+        <file>./magnet_xml_import.php</file>
+        <file>./magnet_xml_import.civix.php</file>
+      </exclude>
     </whitelist>
   </filter>
   <listeners>
