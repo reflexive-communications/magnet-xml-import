@@ -86,10 +86,10 @@ class CRM_MagnetXmlImport_Service
         if (preg_match("/\d{8}-\d{8}-\d{8}/", $contactData[$this->config['bankAccountNumberParameter']])) {
             $accountNumber = str_replace("-", "", $contactData[$this->config['bankAccountNumberParameter']]);
             // format '1111 2222 3333 4444 5555 6666'
-            $partial_iban = trim(chunk_split($accountNumber, 4, ' '));
+            $partialIban = trim(chunk_split($accountNumber, 4, ' '));
             $contacts = civicrm_api3('Contact', 'get', [
                 'sequential' => 1,
-                $this->config['bankAccountNumberParameter'] => ['LIKE' => '%'.$contactData[$this->config['bankAccountNumberParameter']].'%'],
+                $this->config['bankAccountNumberParameter'] => ['LIKE' => '%'.$partialIban.'%'],
             ]);
             if ($contacts['count'] > 0) {
                 return $contacts['values'][0]['id'];
