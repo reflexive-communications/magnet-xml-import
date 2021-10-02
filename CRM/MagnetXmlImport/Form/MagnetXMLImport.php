@@ -44,7 +44,7 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImport extends CRM_Core_Form
         $this->add('text', 'source', ts('Source'), [], true);
         $this->add('select', 'financialTypeId', ts('Financial Type'), [''=>ts('- select -')] + CRM_Contribute_BAO_Contribution::buildOptions('financial_type_id', 'search'), true);
         $this->add('select', 'paymentInstrumentId', ts('Payment method'), [''=>ts('- select -')] + CRM_Contribute_BAO_Contribution::buildOptions('payment_instrument_id', 'search'), true);
-        $fields = CRM_Core_BAO_UFField::getAvailableFields($this->_gid, $defaults);
+        $fields = CRM_Core_BAO_UFField::getAvailableFields();
         $contactParamNames = ['Contact', 'Individual'];
         $paramOptions = [];
         foreach ($fields as $k => $value) {
