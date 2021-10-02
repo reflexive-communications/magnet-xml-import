@@ -31,9 +31,22 @@ class CRM_MagnetXmlImport_ServiceTest extends \PHPUnit\Framework\TestCase implem
 
     /**
      * Process test case.
+     * Create the custom group and field,
      */
     public function testProcess()
     {
+        $customGroup = \Civi\Api4\CustomGroup::create(false)
+            ->addValue('title', 'TestCustomGroupForServiceTests')
+            ->addValue('extends', 'Contact')
+            ->addValue('is_active', true)
+            ->execute()
+            ->first();
+        \Civi\Api4\CustomField::create()
+            ->addValue('custom_group_id', $customGroup['id'])
+            ->addValue('label', 'bank account number')
+            ->addValue('data_type', 'String')
+            ->addValue('html_type', 'Text')
+            ->execute();
         $config = [
             'source' => 'Magnet Bank',
             'financialTypeId' => 1,
