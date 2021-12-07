@@ -1,25 +1,30 @@
 <?xml version="1.0"?>
-<phpunit backupGlobals="false" backupStaticAttributes="false" colors="true" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true" processIsolation="false" stopOnFailure="false" bootstrap="tests/phpunit/bootstrap.php">
-  <testsuites>
-    <testsuite name="My Test Suite">
-      <directory>./tests/phpunit</directory>
-    </testsuite>
-  </testsuites>
-  <filter>
-    <whitelist>
-      <directory suffix=".php">./</directory>
-      <exclude>
-        <!-- Skip the test directory -->
-        <directory>./tests</directory>
-        <!-- Skip the generated files -->
-        <file>./magnet_xml_import.php</file>
-        <file>./magnet_xml_import.civix.php</file>
-      </exclude>
-    </whitelist>
-  </filter>
-  <listeners>
-    <listener class="Civi\Test\CiviTestListener">
-      <arguments/>
-    </listener>
-  </listeners>
+<phpunit colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         convertDeprecationsToExceptions="true"
+         bootstrap="tests/phpunit/bootstrap.php">
+    <testsuites>
+        <testsuite name="My Test Suite">
+            <directory>./tests/phpunit</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./</directory>
+            <exclude>
+                <!-- Skip the test directory -->
+                <directory>./tests</directory>
+                <!-- Skip the generated files -->
+                <file>./magnet_xml_import.php</file>
+                <file>./magnet_xml_import.civix.php</file>
+            </exclude>
+        </whitelist>
+    </filter>
+    <listeners>
+        <listener class="Civi\Test\CiviTestListener">
+            <arguments/>
+        </listener>
+    </listeners>
 </phpunit>
