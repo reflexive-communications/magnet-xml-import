@@ -1,5 +1,7 @@
 # magnet-xml-import
 
+[![CI](https://github.com/reflexive-communications/magnet-xml-import/actions/workflows/main.yml/badge.svg)](https://github.com/reflexive-communications/magnet-xml-import/actions/workflows/main.yml)
+
 This extension lets you import contribution transactions from Magnet XML. It provides an administration interface where you can set the parameters of the contributions.
 
 The extension is licensed under [AGPL-3.0](LICENSE.txt).
