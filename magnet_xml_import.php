@@ -180,7 +180,7 @@ function magnet_xml_import_civicrm_navigationMenu(&$menu)
     _magnet_xml_import_civix_insert_navigation_menu($menu, 'Contributions', [
         'label' => E::ts('Magnet XML Import'),
         'name' => 'magnet_xml_import',
-        'url' => 'civicrm/contribute/manget-xml',
+        'url' => 'civicrm/contribute/magnet-xml',
         'permission' => 'administer CiviCRM,access CiviContribute,edit contributions',
         'operator' => 'AND',
         'separator' => 0,
