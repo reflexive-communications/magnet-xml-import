@@ -16,9 +16,9 @@ The admin form can be reached from the `Contribution > Magnet XML Import` menu.
 
 The `Source` parameter will be used as the value of the constribution source. You can add any text you want. The default value is `Magnet Bank`. Required.
 
-The selected `Financial Type` will be set as the financial_type_id of the contribution. You can choose from the financial types provided by the system. The default value is `Donation`. Required.
+The selected `Financial Type` will be set as the `financial_type_id` of the contribution. You can choose from the financial types provided by the system. The default value is `Donation`. Required.
 
-The selected `Payment method` will be set as the payment_instrument_id of the contribution. You can choose from the payment methods provided by the system. The default value is `EFT`. Required.
+The selected `Payment method` will be set as the `payment_instrument_id` of the contribution. You can choose from the payment methods provided by the system. The default value is `EFT`. Required.
 
 The selected `Bank Account` will be used for the contact identification. This contact parameter has to store the bank account id of the contact. You can choose from the contact parameters provided by the system. The default value is `custom_1` custom parameter. Required.
 
