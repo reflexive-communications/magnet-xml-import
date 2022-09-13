@@ -16,9 +16,9 @@ The admin form can be reached from the `Contribution > Magnet XML Import` menu.
 
 The `Source` parameter will be used as the value of the constribution source. You can add any text you want. The default value is `Magnet Bank`. Required.
 
-The selected `Financial Type` will be set as the financial\_type\_id of the contribution. You can choose from the financial types provided by the system. The default value is `Donation`. Required.
+The selected `Financial Type` will be set as the financial_type_id of the contribution. You can choose from the financial types provided by the system. The default value is `Donation`. Required.
 
-The selected `Payment method` will be set as the payment\_instrument\_id of the contribution. You can choose from the payment methods provided by the system. The default value is `EFT`. Required.
+The selected `Payment method` will be set as the payment_instrument_id of the contribution. You can choose from the payment methods provided by the system. The default value is `EFT`. Required.
 
 The selected `Bank Account` will be used for the contact identification. This contact parameter has to store the bank account id of the contact. You can choose from the contact parameters provided by the system. The default value is `custom_1` custom parameter. Required.
 
@@ -28,19 +28,19 @@ The `Magnet XML file` is the upload field for the XML. It does not have default 
 
 ### The import workflow
 
-- Navigate to the form from the `Contribution > Magnet XML Import` menu.
+-   Navigate to the form from the `Contribution > Magnet XML Import` menu.
 
 ![admin form](./assets/docs/admin-form.png)
 
-- Change the settings if necessary and upload the Magnet XML file.
+-   Change the settings if necessary and upload the Magnet XML file.
 
 ![file upload](./assets/docs/admin-xml-upload.png)
 
-- Submit the form.
+-   Submit the form.
 
 ![submit form](./assets/docs/admin-submit.png)
 
-- Check the statistics.
+-   Check the statistics.
 
 ![import stats](./assets/docs/admin-import-stats.png)
 
@@ -60,8 +60,8 @@ Finally it creates the contribution and increases the imported stat. When the im
 
 ## Requirements
 
-* PHP v7.3+
-* CiviCRM 5.37+
+-   PHP v7.3+
+-   CiviCRM 5.37+
 
 ## Installation (CLI, Git)
 
