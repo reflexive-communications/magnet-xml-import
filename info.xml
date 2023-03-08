@@ -26,13 +26,17 @@
     <version>1.0.5</version>
     <develStage>stable</develStage>
     <compatibility>
-        <ver>5.0</ver>
+        <ver>5.27</ver>
     </compatibility>
     <classloader>
         <psr0 prefix="CRM_" path=""/>
         <psr4 prefix="Civi\" path="Civi"/>
     </classloader>
+    <mixins>
+        <mixin>menu-xml@1.0.0</mixin>
+    </mixins>
     <civix>
         <namespace>CRM/MagnetXmlImport</namespace>
+        <format>22.12.1</format>
     </civix>
 </extension>
