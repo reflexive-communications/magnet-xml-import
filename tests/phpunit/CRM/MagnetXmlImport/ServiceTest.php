@@ -15,8 +15,8 @@ class CRM_MagnetXmlImport_ServiceTest extends \PHPUnit\Framework\TestCase implem
     public function setUpHeadless()
     {
         return \Civi\Test::headless()
-      ->installMe(__DIR__)
-      ->apply();
+            ->installMe(__DIR__)
+            ->apply();
     }
 
     public function setUp(): void

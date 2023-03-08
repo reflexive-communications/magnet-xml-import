@@ -59,7 +59,7 @@ class CRM_MagnetXmlImport_TransformerTest extends \PHPUnit\Framework\TestCase
         $transformed = CRM_MagnetXmlImport_Transformer::magnetTransactionToContribution($xml, $config);
         $expected = [
             'trxn_id' => $trxnId,
-            'total_amount' => (float) $amount,
+            'total_amount' => (float)$amount,
             'currency' => $currency,
             'receive_date' => '20160115',
             'source' => $config['source'],
