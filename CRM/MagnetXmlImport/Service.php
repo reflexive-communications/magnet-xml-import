@@ -5,7 +5,9 @@ use CRM_MagnetXmlImport_ExtensionUtil as E;
 class CRM_MagnetXmlImport_Service
 {
     private $filePath;
+
     private $config;
+
     private $stats;
 
     public function __construct(array $config, string $path)
@@ -97,6 +99,7 @@ class CRM_MagnetXmlImport_Service
         }
         // Still not found. Create a brand new contact based on $contactData
         $contact = civicrm_api3('Contact', 'create', $contactData);
+
         return $contact['id'];
     }
 
@@ -136,6 +139,7 @@ class CRM_MagnetXmlImport_Service
         } catch (Exception $e) {
             $this->raiseError('Failed to detect duplication for the following transaction: '.$trxnId.' Details: '.$e->getMessage());
         }
+
         return false;
     }
 
@@ -156,10 +160,12 @@ class CRM_MagnetXmlImport_Service
                 $contribution = $contribution->addValue($key, $value);
             }
             $contribution->execute();
+
             return true;
         } catch (Exception $e) {
             $this->raiseError('Failed to create CRM contribution for the following transaction: '.$params['trxn_id'].' Details: '.$e->getMessage());
         }
+
         return false;
     }
 }

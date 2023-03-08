@@ -29,7 +29,8 @@ class CRM_MagnetXmlImport_TransformerTest extends \PHPUnit\Framework\TestCase
     {
         $contactDisplayName = 'Teszt Contact01';
         $bankAccountNumber = 'HU20 1111 2222 3333 4445 0000 0000';
-        $xmlString = '<Tranzakcio><Tranzakcioszam>trxn003</Tranzakcioszam><Osszeg Devizanem="HUF">1000.00</Osszeg><Esedekessegnap>2016.01.15.</Esedekessegnap><Ellenpartner>'.$contactDisplayName.'</Ellenpartner><Ellenszamla>'.$bankAccountNumber.'</Ellenszamla></Tranzakcio>';
+        $xmlString = '<Tranzakcio><Tranzakcioszam>trxn003</Tranzakcioszam><Osszeg Devizanem="HUF">1000.00</Osszeg><Esedekessegnap>2016.01.15.</Esedekessegnap><Ellenpartner>'.$contactDisplayName
+            .'</Ellenpartner><Ellenszamla>'.$bankAccountNumber.'</Ellenszamla></Tranzakcio>';
         $bankAccountName = 'custom_1';
         $xml = simplexml_load_string($xmlString);
         $transformed = CRM_MagnetXmlImport_Transformer::magnetTransactionToContact($xml, $bankAccountName);
@@ -54,12 +55,13 @@ class CRM_MagnetXmlImport_TransformerTest extends \PHPUnit\Framework\TestCase
         $trxnId = 'trxn003';
         $amount = '1000.00';
         $currency = 'HUF';
-        $xmlString = '<Tranzakcio><Tranzakcioszam>'.$trxnId.'</Tranzakcioszam><Osszeg Devizanem="'.$currency.'">'.$amount.'</Osszeg><Esedekessegnap>2016.01.15.</Esedekessegnap><Ellenpartner>Teszt Contact01</Ellenpartner><Ellenszamla>HU20 1111 2222 3333 4445 0000 0000</Ellenszamla></Tranzakcio>';
+        $xmlString = '<Tranzakcio><Tranzakcioszam>'.$trxnId.'</Tranzakcioszam><Osszeg Devizanem="'.$currency.'">'.$amount
+            .'</Osszeg><Esedekessegnap>2016.01.15.</Esedekessegnap><Ellenpartner>Teszt Contact01</Ellenpartner><Ellenszamla>HU20 1111 2222 3333 4445 0000 0000</Ellenszamla></Tranzakcio>';
         $xml = simplexml_load_string($xmlString);
         $transformed = CRM_MagnetXmlImport_Transformer::magnetTransactionToContribution($xml, $config);
         $expected = [
             'trxn_id' => $trxnId,
-            'total_amount' => (float) $amount,
+            'total_amount' => (float)$amount,
             'currency' => $currency,
             'receive_date' => '20160115',
             'source' => $config['source'],

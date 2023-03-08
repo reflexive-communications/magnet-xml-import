@@ -15,8 +15,8 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImportTest extends \PHPUnit\Framework\Te
     public function setUpHeadless()
     {
         return \Civi\Test::headless()
-      ->installMe(__DIR__)
-      ->apply();
+            ->installMe(__DIR__)
+            ->apply();
     }
 
     public function setUp(): void
@@ -103,6 +103,7 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImportTest extends \PHPUnit\Framework\Te
         $result = CRM_MagnetXmlImport_Form_MagnetXMLImport::fileExtension([], $fileData);
         self::assertTrue($result);
     }
+
     public function testFileExtensionNotValidFile()
     {
         $fileData = [

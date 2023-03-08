@@ -35,15 +35,14 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImport extends CRM_Core_Form
 
     /**
      * Build form
-     *
      * The list of the contact parameters are based on this solution:
      * https://github.com/civicrm/civicrm-core/blob/master/CRM/UF/Form/Field.php#L237-L247
      */
     public function buildQuickForm()
     {
         $this->add('text', 'source', ts('Source'), [], true);
-        $this->add('select', 'financialTypeId', ts('Financial Type'), [''=>ts('- select -')] + CRM_Contribute_BAO_Contribution::buildOptions('financial_type_id', 'search'), true);
-        $this->add('select', 'paymentInstrumentId', ts('Payment method'), [''=>ts('- select -')] + CRM_Contribute_BAO_Contribution::buildOptions('payment_instrument_id', 'search'), true);
+        $this->add('select', 'financialTypeId', ts('Financial Type'), ['' => ts('- select -')] + CRM_Contribute_BAO_Contribution::buildOptions('financial_type_id', 'search'), true);
+        $this->add('select', 'paymentInstrumentId', ts('Payment method'), ['' => ts('- select -')] + CRM_Contribute_BAO_Contribution::buildOptions('payment_instrument_id', 'search'), true);
         $fields = CRM_Core_BAO_UFField::getAvailableFields();
         $contactParamNames = ['Contact', 'Individual'];
         $paramOptions = [];
@@ -56,13 +55,13 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImport extends CRM_Core_Form
                 if ($customFieldId = CRM_Core_BAO_CustomField::getKeyID($key1)) {
                     $customGroupId = CRM_Core_DAO::getFieldValue('CRM_Core_DAO_CustomField', $customFieldId, 'custom_group_id');
                     $customGroupName = CRM_Core_DAO::getFieldValue('CRM_Core_DAO_CustomGroup', $customGroupId, 'title');
-                    $paramOptions[$key1] = $value1['title'] . ' :: ' . $customGroupName;
+                    $paramOptions[$key1] = $value1['title'].' :: '.$customGroupName;
                 } else {
                     $paramOptions[$key1] = $value1['title'];
                 }
             }
         }
-        $this->add('select', 'bankAccountNumberParameter', ts('Bank Account'), [''=>ts('- select -')] + $paramOptions, true);
+        $this->add('select', 'bankAccountNumberParameter', ts('Bank Account'), ['' => ts('- select -')] + $paramOptions, true);
         $this->add('checkbox', 'onlyIncome', ts('Only income'), [], false);
         $this->add('file', 'importSource', ts('Magnet XML file'), [], true);
         $formParameterNames = ['source', 'financialTypeId', 'paymentInstrumentId', 'bankAccountNumberParameter', 'onlyIncome', 'importSource'];
@@ -84,6 +83,7 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImport extends CRM_Core_Form
     {
         $this->addFormRule(['CRM_MagnetXmlImport_Form_MagnetXMLImport', 'fileExtension']);
     }
+
     /**
      * Accept only xml files.
      */
@@ -94,6 +94,7 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImport extends CRM_Core_Form
         if (array_search($files['importSource']['type'], $validTypes) === false) {
             $errors['importSource'] = E::ts('Only XML files allowed.');
         }
+
         return empty($errors) ? true : $errors;
     }
 
