@@ -70,5 +70,5 @@ install it with the command-line tool [cv](https://github.com/civicrm/cv).
 
 ```bash
 git clone https://github.com/reflexive-communications/magnet-xml-import.git
-cv en magnet_xml_import
+cv en magnet-xml-import
 ```
