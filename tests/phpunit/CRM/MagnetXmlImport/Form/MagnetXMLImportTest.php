@@ -1,34 +1,12 @@
 <?php
 
-use CRM_MagnetXmlImport_ExtensionUtil as E;
-use Civi\Test\HeadlessInterface;
-use Civi\Test\HookInterface;
-use Civi\Test\TransactionalInterface;
+use Civi\MagnetXmlImport\HeadlessTestCase;
 
 /**
- * Testcases for the Admin form functionalities.
- *
  * @group headless
  */
-class CRM_MagnetXmlImport_Form_MagnetXMLImportTest extends \PHPUnit\Framework\TestCase implements HeadlessInterface, HookInterface, TransactionalInterface
+class CRM_MagnetXmlImport_Form_MagnetXMLImportTest extends HeadlessTestCase
 {
-    public function setUpHeadless()
-    {
-        return \Civi\Test::headless()
-            ->installMe(__DIR__)
-            ->apply();
-    }
-
-    public function setUp(): void
-    {
-        parent::setUp();
-    }
-
-    public function tearDown(): void
-    {
-        parent::tearDown();
-    }
-
     /**
      * PreProcess test case pre process does nothing.
      */

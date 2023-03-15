@@ -1,34 +1,12 @@
 <?php
 
-use CRM_MagnetXmlImport_ExtensionUtil as E;
-use Civi\Test\HeadlessInterface;
-use Civi\Test\HookInterface;
-use Civi\Test\TransactionalInterface;
+use Civi\MagnetXmlImport\HeadlessTestCase;
 
 /**
- * FIXME - Add test description.
- *
  * @group headless
  */
-class CRM_MagnetXmlImport_ServiceTest extends \PHPUnit\Framework\TestCase implements HeadlessInterface, HookInterface, TransactionalInterface
+class CRM_MagnetXmlImport_ServiceTest extends HeadlessTestCase
 {
-    public function setUpHeadless()
-    {
-        return \Civi\Test::headless()
-            ->installMe(__DIR__)
-            ->apply();
-    }
-
-    public function setUp(): void
-    {
-        parent::setUp();
-    }
-
-    public function tearDown(): void
-    {
-        parent::tearDown();
-    }
-
     /**
      * Process test case.
      * Create the custom group and field,
