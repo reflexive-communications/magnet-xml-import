@@ -3,7 +3,7 @@
 use Civi\MagnetXmlImport\HeadlessTestCase;
 
 /**
- * This is a generic test class for the extension (implemented with PHPUnit).
+ * @group headless
  */
 class CRM_MagnetXmlImport_TransformerTest extends HeadlessTestCase
 {
