@@ -1,5 +1,7 @@
 <?php
 
+use Civi\Api4\CustomField;
+use Civi\Api4\CustomGroup;
 use Civi\MagnetXmlImport\HeadlessTestCase;
 
 /**
@@ -40,13 +42,13 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImportTest extends HeadlessTestCase
      */
     public function testBuildQuickForm()
     {
-        $customGroup = \Civi\Api4\CustomGroup::create(false)
+        $customGroup = CustomGroup::create(false)
             ->addValue('title', 'TestCustomGroup')
             ->addValue('extends', 'Contact')
             ->addValue('is_active', true)
             ->execute()
             ->first();
-        \Civi\Api4\CustomField::create()
+        CustomField::create()
             ->addValue('custom_group_id', $customGroup['id'])
             ->addValue('label', 'bank account number')
             ->addValue('data_type', 'String')
@@ -98,13 +100,13 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImportTest extends HeadlessTestCase
      */
     public function testPostProcess()
     {
-        $customGroup = \Civi\Api4\CustomGroup::create(false)
+        $customGroup = CustomGroup::create(false)
             ->addValue('title', 'TestCustomGroupPostProcess')
             ->addValue('extends', 'Contact')
             ->addValue('is_active', true)
             ->execute()
             ->first();
-        \Civi\Api4\CustomField::create()
+        CustomField::create()
             ->addValue('custom_group_id', $customGroup['id'])
             ->addValue('label', 'bank account number')
             ->addValue('data_type', 'String')
