@@ -1,34 +1,14 @@
 <?php
 
-use CRM_MagnetXmlImport_ExtensionUtil as E;
-use Civi\Test\HeadlessInterface;
-use Civi\Test\HookInterface;
-use Civi\Test\TransactionalInterface;
+use Civi\Api4\CustomField;
+use Civi\Api4\CustomGroup;
+use Civi\MagnetXmlImport\HeadlessTestCase;
 
 /**
- * Testcases for the Admin form functionalities.
- *
  * @group headless
  */
-class CRM_MagnetXmlImport_Form_MagnetXMLImportTest extends \PHPUnit\Framework\TestCase implements HeadlessInterface, HookInterface, TransactionalInterface
+class CRM_MagnetXmlImport_Form_MagnetXMLImportTest extends HeadlessTestCase
 {
-    public function setUpHeadless()
-    {
-        return \Civi\Test::headless()
-            ->installMe(__DIR__)
-            ->apply();
-    }
-
-    public function setUp(): void
-    {
-        parent::setUp();
-    }
-
-    public function tearDown(): void
-    {
-        parent::tearDown();
-    }
-
     /**
      * PreProcess test case pre process does nothing.
      */
@@ -62,13 +42,13 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImportTest extends \PHPUnit\Framework\Te
      */
     public function testBuildQuickForm()
     {
-        $customGroup = \Civi\Api4\CustomGroup::create(false)
+        $customGroup = CustomGroup::create(false)
             ->addValue('title', 'TestCustomGroup')
             ->addValue('extends', 'Contact')
             ->addValue('is_active', true)
             ->execute()
             ->first();
-        \Civi\Api4\CustomField::create()
+        CustomField::create()
             ->addValue('custom_group_id', $customGroup['id'])
             ->addValue('label', 'bank account number')
             ->addValue('data_type', 'String')
@@ -120,13 +100,13 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImportTest extends \PHPUnit\Framework\Te
      */
     public function testPostProcess()
     {
-        $customGroup = \Civi\Api4\CustomGroup::create(false)
+        $customGroup = CustomGroup::create(false)
             ->addValue('title', 'TestCustomGroupPostProcess')
             ->addValue('extends', 'Contact')
             ->addValue('is_active', true)
             ->execute()
             ->first();
-        \Civi\Api4\CustomField::create()
+        CustomField::create()
             ->addValue('custom_group_id', $customGroup['id'])
             ->addValue('label', 'bank account number')
             ->addValue('data_type', 'String')
