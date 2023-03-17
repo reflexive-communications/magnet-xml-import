@@ -10,8 +10,9 @@ use Civi\MagnetXmlImport\HeadlessTestCase;
 class CRM_MagnetXmlImport_ServiceTest extends HeadlessTestCase
 {
     /**
-     * Process test case.
-     * Create the custom group and field,
+     * @return void
+     * @throws \API_Exception
+     * @throws \Civi\API\Exception\UnauthorizedException
      */
     public function testProcess()
     {
