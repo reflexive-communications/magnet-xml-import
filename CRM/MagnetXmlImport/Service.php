@@ -1,5 +1,7 @@
 <?php
 
+use Civi\Api4\Contribution;
+
 class CRM_MagnetXmlImport_Service
 {
     private $filePath;
@@ -84,8 +86,8 @@ class CRM_MagnetXmlImport_Service
             return $contacts['values'][0]['id'];
         }
         // Not found. Some bank account nos are in IBAN, others are in hungarian format, let's try to convert
-        if (preg_match("/\d{8}-\d{8}-\d{8}/", $contactData[$this->config['bankAccountNumberParameter']])) {
-            $accountNumber = str_replace("-", "", $contactData[$this->config['bankAccountNumberParameter']]);
+        if (preg_match('/\d{8}-\d{8}-\d{8}/', $contactData[$this->config['bankAccountNumberParameter']])) {
+            $accountNumber = str_replace('-', '', $contactData[$this->config['bankAccountNumberParameter']]);
             // format '1111 2222 3333 4444 5555 6666'
             $partialIban = trim(chunk_split($accountNumber, 4, ' '));
             $contacts = civicrm_api3('Contact', 'get', [
@@ -128,7 +130,7 @@ class CRM_MagnetXmlImport_Service
     {
         // Duplicate detection. skip the import when the transaction id already exists.
         try {
-            $contributions = \Civi\Api4\Contribution::get(false)
+            $contributions = Contribution::get(false)
                 ->addWhere('trxn_id', '=', $trxnId)
                 ->setLimit(1)
                 ->execute();
@@ -154,7 +156,7 @@ class CRM_MagnetXmlImport_Service
     private function contribution(array $params): bool
     {
         try {
-            $contribution = \Civi\Api4\Contribution::create(false);
+            $contribution = Contribution::create(false);
             foreach ($params as $key => $value) {
                 $contribution = $contribution->addValue($key, $value);
             }
