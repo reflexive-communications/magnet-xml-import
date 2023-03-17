@@ -8,7 +8,7 @@ use Civi\MagnetXmlImport\HeadlessTestCase;
 class CRM_MagnetXmlImport_TransformerTest extends HeadlessTestCase
 {
     /**
-     * magnetTransactionToContact test case.
+     * @return void
      */
     public function testMagnetTransactionToContact()
     {
@@ -28,7 +28,7 @@ class CRM_MagnetXmlImport_TransformerTest extends HeadlessTestCase
     }
 
     /**
-     * magnetTransactionToContribution test case.
+     * @return void
      */
     public function testMagnetTransactionToContribution()
     {

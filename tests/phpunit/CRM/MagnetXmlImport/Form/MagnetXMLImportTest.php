@@ -10,7 +10,7 @@ use Civi\MagnetXmlImport\HeadlessTestCase;
 class CRM_MagnetXmlImport_Form_MagnetXMLImportTest extends HeadlessTestCase
 {
     /**
-     * PreProcess test case pre process does nothing.
+     * @return void
      */
     public function testPreProcess()
     {
@@ -19,7 +19,7 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImportTest extends HeadlessTestCase
     }
 
     /**
-     * setDefaultValues test case.
+     * @return void
      */
     public function testSetDefaultValues()
     {
@@ -36,9 +36,10 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImportTest extends HeadlessTestCase
     }
 
     /**
-     * Build quick form test case.
-     * One custom contact param is created
-     * to be able to test that branch.
+     * @return void
+     * @throws \API_Exception
+     * @throws \CRM_Core_Exception
+     * @throws \Civi\API\Exception\UnauthorizedException
      */
     public function testBuildQuickForm()
     {
@@ -61,7 +62,7 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImportTest extends HeadlessTestCase
     }
 
     /**
-     * addRules test case.
+     * @return void
      */
     public function testAddRules()
     {
@@ -71,7 +72,7 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImportTest extends HeadlessTestCase
     }
 
     /**
-     * fileExtension test cases.
+     * @return void
      */
     public function testFileExtensionValidFile()
     {
@@ -84,6 +85,9 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImportTest extends HeadlessTestCase
         self::assertTrue($result);
     }
 
+    /**
+     * @return void
+     */
     public function testFileExtensionNotValidFile()
     {
         $fileData = [

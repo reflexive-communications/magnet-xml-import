@@ -10,16 +10,6 @@ use CRM_MagnetXmlImport_ExtensionUtil as E;
 class CRM_MagnetXmlImport_Form_MagnetXMLImport extends CRM_Core_Form
 {
     /**
-     * Preprocess form
-     */
-    public function preProcess(): void
-    {
-        parent::preProcess();
-    }
-
-    /**
-     * Set default values
-     *
      * @return array
      */
     public function setDefaultValues(): array
@@ -34,9 +24,8 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImport extends CRM_Core_Form
     }
 
     /**
-     * Build form
-     * The list of the contact parameters are based on this solution:
-     * https://github.com/civicrm/civicrm-core/blob/master/CRM/UF/Form/Field.php#L237-L247
+     * @return void
+     * @throws \CRM_Core_Exception
      */
     public function buildQuickForm(): void
     {
@@ -77,7 +66,7 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImport extends CRM_Core_Form
     }
 
     /**
-     * If your form requires special validation, add one or more callbacks here
+     * @return void
      */
     public function addRules(): void
     {
@@ -86,6 +75,11 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImport extends CRM_Core_Form
 
     /**
      * Accept only xml files.
+     *
+     * @param $values
+     * @param $files
+     *
+     * @return array|true
      */
     public static function fileExtension($values, $files)
     {
@@ -99,7 +93,7 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImport extends CRM_Core_Form
     }
 
     /**
-     * Postprocess form
+     * @return void
      */
     public function postProcess(): void
     {

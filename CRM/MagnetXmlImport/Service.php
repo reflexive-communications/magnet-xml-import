@@ -1,7 +1,5 @@
 <?php
 
-use CRM_MagnetXmlImport_ExtensionUtil as E;
-
 class CRM_MagnetXmlImport_Service
 {
     private $filePath;
@@ -23,7 +21,7 @@ class CRM_MagnetXmlImport_Service
         ];
     }
 
-    /*
+    /**
      * This function starts the xml parsing process.
      *
      * @return array the stats about the process.
@@ -64,7 +62,7 @@ class CRM_MagnetXmlImport_Service
         return $this->stats;
     }
 
-    /*
+    /**
      * This function returns the contact id of the contributor contact.
      * First it tries to find it base on the bank account number parameter.
      * If not found it formats the parameter and tries to find it again.
@@ -74,6 +72,7 @@ class CRM_MagnetXmlImport_Service
      * @param array $contactData
      *
      * @return int $contactId
+     * @throws \CiviCRM_API3_Exception
      */
     private function contact(array $contactData): int
     {
@@ -103,7 +102,7 @@ class CRM_MagnetXmlImport_Service
         return $contact['id'];
     }
 
-    /*
+    /**
      * This function handles the error cases.
      * It creates a log entry with a prefix.
      * Also updates the error stats.
@@ -116,7 +115,7 @@ class CRM_MagnetXmlImport_Service
         $this->stats['errors'][] = $message;
     }
 
-    /*
+    /**
      * This function checks for duplicated transaction.
      * If there is a transaction with the same trxn id in
      * the CRM database, it returns true, otherwise false.
@@ -143,7 +142,7 @@ class CRM_MagnetXmlImport_Service
         return false;
     }
 
-    /*
+    /**
      * This function creates a contribution based on the given params.
      * On case of the contribution process fails, it returns false
      * otherwise it returns true.

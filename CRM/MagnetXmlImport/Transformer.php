@@ -1,11 +1,8 @@
 <?php
 
-use CRM_MagnetXmlImport_ExtensionUtil as E;
-
-/*
+/**
  * This class contains the data transformation rules.
  */
-
 class CRM_MagnetXmlImport_Transformer
 {
     const CRM_COMPLETED_STATUS_ID = 1;
