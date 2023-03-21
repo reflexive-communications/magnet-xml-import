@@ -10,7 +10,7 @@ The extension is licensed under [AGPL-3.0](LICENSE.txt).
 
 The admin form can be reached from the `Contribution > Magnet XML Import` menu.
 
-![admin form](./assets/docs/admin-form.png)
+![admin form](./images/admin-form.png)
 
 ### The parameters
 
@@ -30,19 +30,19 @@ The `Magnet XML file` is the upload field for the XML. It does not have default 
 
 -   Navigate to the form from the `Contribution > Magnet XML Import` menu.
 
-![admin form](./assets/docs/admin-form.png)
+![admin form](./images/admin-form.png)
 
 -   Change the settings if necessary and upload the Magnet XML file.
 
-![file upload](./assets/docs/admin-xml-upload.png)
+![file upload](./images/admin-xml-upload.png)
 
 -   Submit the form.
 
-![submit form](./assets/docs/admin-submit.png)
+![submit form](./images/admin-submit.png)
 
 -   Check the statistics.
 
-![import stats](./assets/docs/admin-import-stats.png)
+![import stats](./images/admin-import-stats.png)
 
 ## How does it work
 
