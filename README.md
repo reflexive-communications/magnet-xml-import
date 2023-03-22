@@ -61,9 +61,9 @@ Finally it creates the contribution and increases the imported stat. When the im
 ## Requirements
 
 -   PHP v7.3+
--   CiviCRM 5.37+
+-   CiviCRM v5.37+
 
-## Installation (CLI, Git)
+## Installation
 
 Sysadmins and developers may clone the [Git](https://en.wikipedia.org/wiki/Git) repo for this extension and
 install it with the command-line tool [cv](https://github.com/civicrm/cv).
