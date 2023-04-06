@@ -3,6 +3,7 @@
 use Civi\Api4\CustomField;
 use Civi\Api4\CustomGroup;
 use Civi\MagnetXmlImport\HeadlessTestCase;
+use CRM_MagnetXmlImport_ExtensionUtil as E;
 
 /**
  * @group headless
@@ -127,7 +128,7 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImportTest extends HeadlessTestCase
         $submitFiles = [
             'importSource' => [
                 'type' => 'text/notxml',
-                'tmp_name' => __DIR__.'/sampleData.xml',
+                'tmp_name' => E::path('tests/phpunit/Civi/MagnetXmlImport/sampleData.xml'),
             ],
         ];
         $form = new CRM_MagnetXmlImport_Form_MagnetXMLImport();

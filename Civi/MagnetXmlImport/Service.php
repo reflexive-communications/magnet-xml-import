@@ -4,6 +4,7 @@ namespace Civi\MagnetXmlImport;
 
 use Civi;
 use Civi\Api4\Contribution;
+use Exception;
 
 class Service
 {
