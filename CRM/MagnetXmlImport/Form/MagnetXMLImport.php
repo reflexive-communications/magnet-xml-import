@@ -1,5 +1,6 @@
 <?php
 
+use Civi\MagnetXmlImport\Service;
 use CRM_MagnetXmlImport_ExtensionUtil as E;
 
 /**
@@ -102,7 +103,7 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImport extends CRM_Core_Form
         foreach ($paramNames as $name) {
             $config[$name] = $this->_submitValues[$name];
         }
-        $service = new CRM_MagnetXmlImport_Service($config, $this->_submitFiles['importSource']['tmp_name']);
+        $service = new Service($config, $this->_submitFiles['importSource']['tmp_name']);
         $stats = $service->process();
         // print out the import stats.
         $msgHtml = '<ul>';

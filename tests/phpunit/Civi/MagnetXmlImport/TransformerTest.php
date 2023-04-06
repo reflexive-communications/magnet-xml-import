@@ -1,11 +1,11 @@
 <?php
 
-use Civi\MagnetXmlImport\HeadlessTestCase;
+namespace Civi\MagnetXmlImport;
 
 /**
  * @group headless
  */
-class CRM_MagnetXmlImport_TransformerTest extends HeadlessTestCase
+class TransformerTest extends HeadlessTestCase
 {
     /**
      * @return void
@@ -18,7 +18,7 @@ class CRM_MagnetXmlImport_TransformerTest extends HeadlessTestCase
             .'</Ellenpartner><Ellenszamla>'.$bankAccountNumber.'</Ellenszamla></Tranzakcio>';
         $bankAccountName = 'custom_1';
         $xml = simplexml_load_string($xmlString);
-        $transformed = CRM_MagnetXmlImport_Transformer::magnetTransactionToContact($xml, $bankAccountName);
+        $transformed = Transformer::magnetTransactionToContact($xml, $bankAccountName);
         $expected = [
             'contact_type' => 'Individual',
             'display_name' => $contactDisplayName,
@@ -43,7 +43,7 @@ class CRM_MagnetXmlImport_TransformerTest extends HeadlessTestCase
         $xmlString = '<Tranzakcio><Tranzakcioszam>'.$trxnId.'</Tranzakcioszam><Osszeg Devizanem="'.$currency.'">'.$amount
             .'</Osszeg><Esedekessegnap>2016.01.15.</Esedekessegnap><Ellenpartner>Teszt Contact01</Ellenpartner><Ellenszamla>HU20 1111 2222 3333 4445 0000 0000</Ellenszamla></Tranzakcio>';
         $xml = simplexml_load_string($xmlString);
-        $transformed = CRM_MagnetXmlImport_Transformer::magnetTransactionToContribution($xml, $config);
+        $transformed = Transformer::magnetTransactionToContribution($xml, $config);
         $expected = [
             'trxn_id' => $trxnId,
             'total_amount' => (float)$amount,
@@ -52,7 +52,7 @@ class CRM_MagnetXmlImport_TransformerTest extends HeadlessTestCase
             'source' => $config['source'],
             'financial_type_id' => $config['financialTypeId'],
             'payment_instrument_id' => $config['paymentInstrumentId'],
-            'contribution_status_id' => CRM_MagnetXmlImport_Transformer::CRM_COMPLETED_STATUS_ID,
+            'contribution_status_id' => Transformer::CRM_COMPLETED_STATUS_ID,
         ];
         self::assertSame($expected, $transformed);
     }
