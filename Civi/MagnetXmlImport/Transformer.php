@@ -9,7 +9,7 @@ use SimpleXMLElement;
  */
 class Transformer
 {
-    const CRM_COMPLETED_STATUS_ID = 1;
+    public const CRM_COMPLETED_STATUS_ID = 1;
 
     /**
      * Transform Magnet transaction data to civicrm contact data
