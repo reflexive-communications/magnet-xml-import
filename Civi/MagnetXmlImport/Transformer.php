@@ -1,11 +1,15 @@
 <?php
 
+namespace Civi\MagnetXmlImport;
+
+use SimpleXMLElement;
+
 /**
  * This class contains the data transformation rules.
  */
-class CRM_MagnetXmlImport_Transformer
+class Transformer
 {
-    const CRM_COMPLETED_STATUS_ID = 1;
+    public const CRM_COMPLETED_STATUS_ID = 1;
 
     /**
      * Transform Magnet transaction data to civicrm contact data

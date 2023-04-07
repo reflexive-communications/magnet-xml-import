@@ -1,8 +1,12 @@
 <?php
 
-use Civi\Api4\Contribution;
+namespace Civi\MagnetXmlImport;
 
-class CRM_MagnetXmlImport_Service
+use Civi;
+use Civi\Api4\Contribution;
+use Exception;
+
+class Service
 {
     private $filePath;
 
@@ -34,7 +38,7 @@ class CRM_MagnetXmlImport_Service
         $xml = simplexml_load_string($xml_string);
         $this->stats['all'] = count($xml->Tranzakcio);
         foreach ($xml->Tranzakcio as $transaction) {
-            $contributionData = CRM_MagnetXmlImport_Transformer::magnetTransactionToContribution($transaction, $this->config);
+            $contributionData = Transformer::magnetTransactionToContribution($transaction, $this->config);
             // When the skip negative transaction is set, and the amount is not a positive number, we can continue with the next item.
             if ($this->config['onlyIncome'] && $contributionData['total_amount'] < 0.01) {
                 $this->stats['skipped'] = $this->stats['skipped'] + 1;
@@ -45,7 +49,7 @@ class CRM_MagnetXmlImport_Service
                 $this->stats['duplication'] = $this->stats['duplication'] + 1;
                 continue;
             }
-            $contactData = CRM_MagnetXmlImport_Transformer::magnetTransactionToContact($transaction, $this->config['bankAccountNumberParameter']);
+            $contactData = Transformer::magnetTransactionToContact($transaction, $this->config['bankAccountNumberParameter']);
             // First get the contact id that is connected to the bank account number.
             // If it fails, log to file and continue with the next transaction.
             try {

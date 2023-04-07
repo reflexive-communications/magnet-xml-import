@@ -1,13 +1,15 @@
 <?php
 
+namespace Civi\MagnetXmlImport;
+
 use Civi\Api4\CustomField;
 use Civi\Api4\CustomGroup;
-use Civi\MagnetXmlImport\HeadlessTestCase;
+use CRM_MagnetXmlImport_ExtensionUtil as E;
 
 /**
  * @group headless
  */
-class CRM_MagnetXmlImport_ServiceTest extends HeadlessTestCase
+class ServiceTest extends HeadlessTestCase
 {
     /**
      * @return void
@@ -36,8 +38,8 @@ class CRM_MagnetXmlImport_ServiceTest extends HeadlessTestCase
             'bankAccountNumberParameter' => 'custom_1',
             'onlyIncome' => 1,
         ];
-        $path = __DIR__.'/Form/sampleData.xml';
-        $service = new CRM_MagnetXmlImport_Service($config, $path);
+        $path = E::path('tests/phpunit/Civi/MagnetXmlImport/sampleData.xml');
+        $service = new Service($config, $path);
         $stats = $service->process();
         $expectedStats = [
             'all' => 7,
