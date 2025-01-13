@@ -26,7 +26,7 @@
     <version>2.0.0</version>
     <develStage>stable</develStage>
     <compatibility>
-        <ver>5.37</ver>
+        <ver>5.76</ver>
     </compatibility>
     <classloader>
         <psr0 prefix="CRM_" path=""/>
