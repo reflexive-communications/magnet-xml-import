@@ -38,6 +38,6 @@
     </mixins>
     <civix>
         <namespace>CRM/MagnetXmlImport</namespace>
-        <format>22.12.1</format>
+        <format>24.09.1</format>
     </civix>
 </extension>
