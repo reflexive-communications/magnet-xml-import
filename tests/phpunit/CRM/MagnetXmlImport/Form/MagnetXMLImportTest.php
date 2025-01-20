@@ -57,7 +57,6 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImportTest extends HeadlessTestCase
             ->addValue('html_type', 'Text')
             ->execute();
         $form = new CRM_MagnetXmlImport_Form_MagnetXMLImport();
-        $form->setVar('_gid', null);
         self::assertEmpty($form->preProcess(), 'PreProcess supposed to be empty.');
         self::assertEmpty($form->buildQuickForm());
     }
@@ -132,8 +131,8 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImportTest extends HeadlessTestCase
             ],
         ];
         $form = new CRM_MagnetXmlImport_Form_MagnetXMLImport();
-        $form->setVar('_submitValues', $submitValues);
-        $form->setVar('_submitFiles', $submitFiles);
+        $form->_submitValues = $submitValues;
+        $form->_submitFiles = $submitFiles;
         self::assertEmpty($form->preProcess(), 'PreProcess supposed to be empty.');
         self::assertEmpty($form->postProcess(), 'PostProcess supposed to be empty.');
     }
