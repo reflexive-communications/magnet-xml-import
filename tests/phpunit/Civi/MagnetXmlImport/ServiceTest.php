@@ -19,7 +19,7 @@ class ServiceTest extends HeadlessTestCase
             'source' => 'Magnet Bank',
             'financialTypeId' => 1,
             'paymentInstrumentId' => 5,
-            'bankAccountNumberParameter' => 'custom_'.self::$customFieldID,
+            'bankAccountNumberParameter' => 'bank.bank_account_number',
             'onlyIncome' => 1,
         ], E::path('tests/phpunit/Civi/MagnetXmlImport/sampleData.xml'));
 
@@ -28,7 +28,7 @@ class ServiceTest extends HeadlessTestCase
             'imported' => 4,
             'skipped' => 1,
             'duplication' => 1,
-            'errors' => ['Failed to get CRM contact to the transaction: DB Error: unknown error'],
+            'errors' => ['Failed to get CRM contact to the transaction: Failed to execute API: Contact.create Reason: DB Error: unknown error'],
         ], $service->process(), 'Wrong stats');
     }
 }

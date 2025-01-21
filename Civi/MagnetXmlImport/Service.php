@@ -4,6 +4,8 @@ namespace Civi\MagnetXmlImport;
 
 use Civi;
 use Civi\Api4\Contribution;
+use Civi\RcBase\ApiWrapper\Create;
+use Civi\RcBase\ApiWrapper\Get;
 use Exception;
 
 /**
@@ -122,12 +124,16 @@ class Service
      */
     private function contact(array $contactData): int
     {
-        $contacts = civicrm_api3('Contact', 'get', [
-            'sequential' => 1,
-            $this->config['bankAccountNumberParameter'] => $contactData[$this->config['bankAccountNumberParameter']],
+        $contact = Get::entitySingle('Contact', [
+            'select' => ['id'],
+            'where' => [
+                [$this->config['bankAccountNumberParameter'], '=', $contactData[$this->config['bankAccountNumberParameter']]],
+                ['is_deleted', '=', false],
+            ],
+            'limit' => 1,
         ]);
-        if ($contacts['count'] > 0) {
-            return $contacts['values'][0]['id'];
+        if (!is_null($contact)) {
+            return $contact['id'];
         }
 
         // Not found. Some bank account nos are in IBAN, others are in hungarian format, let's try to convert
@@ -135,19 +141,22 @@ class Service
             $accountNumber = str_replace('-', '', $contactData[$this->config['bankAccountNumberParameter']]);
             // format '1111 2222 3333 4444 5555 6666'
             $partialIban = trim(chunk_split($accountNumber, 4, ' '));
-            $contacts = civicrm_api3('Contact', 'get', [
-                'sequential' => 1,
-                $this->config['bankAccountNumberParameter'] => ['LIKE' => '%'.$partialIban.'%'],
+
+            $contact = Get::entitySingle('Contact', [
+                'select' => ['id'],
+                'where' => [
+                    [$this->config['bankAccountNumberParameter'], 'LIKE', "%{$partialIban}%"],
+                    ['is_deleted', '=', false],
+                ],
+                'limit' => 1,
             ]);
-            if ($contacts['count'] > 0) {
-                return $contacts['values'][0]['id'];
+            if (!is_null($contact)) {
+                return $contact['id'];
             }
         }
 
         // Still not found. Create a brand new contact based on $contactData
-        $contact = civicrm_api3('Contact', 'create', $contactData);
-
-        return $contact['id'];
+        return Create::contact($contactData);
     }
 
     /**
