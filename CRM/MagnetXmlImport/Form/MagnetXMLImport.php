@@ -116,6 +116,8 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImport extends CRM_Core_Form
 
     /**
      * @return void
+     * @throws \CRM_Core_Exception
+     * @throws \Civi\RcBase\Exception\APIException
      * @throws \Civi\RcBase\Exception\InvalidArgumentException
      */
     public function postProcess(): void
@@ -128,7 +130,7 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImport extends CRM_Core_Form
             'financialTypeId' => $values['financial_type_id'],
             'paymentInstrumentId' => $values['payment_instrument_id'],
             'onlyIncome' => $values['only_income'],
-        ], $this->_submitFiles['import_file']['tmp_name']))->process();
+        ]))->process($this->_submitFiles['import_file']['tmp_name']);
 
         // Stats
         $msgHtml = '';
