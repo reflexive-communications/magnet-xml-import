@@ -21,6 +21,7 @@ class HeadlessTestCase extends TestCase implements HeadlessInterface
     {
         // Resets DB
         Test::headless()
+            ->install('rc-base')
             ->installMe(__DIR__)
             ->apply(true);
     }
