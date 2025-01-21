@@ -125,11 +125,11 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImport extends CRM_Core_Form
         $values = $this->exportValues();
 
         $stats = (new Service([
-            'bankAccountNumberParameter' => $values['bank_account_custom_field'],
+            'bank_account_custom_field' => $values['bank_account_custom_field'],
             'source' => $values['source'],
-            'financialTypeId' => $values['financial_type_id'],
-            'paymentInstrumentId' => $values['payment_instrument_id'],
-            'onlyIncome' => $values['only_income'],
+            'financial_type_id' => $values['financial_type_id'],
+            'payment_instrument_id' => $values['payment_instrument_id'],
+            'only_income' => $values['only_income'],
         ]))->process($this->_submitFiles['import_file']['tmp_name']);
 
         // Stats

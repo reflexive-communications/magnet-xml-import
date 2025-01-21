@@ -19,10 +19,10 @@ class ServiceTest extends HeadlessTestCase
     {
         $service = new Service([
             'source' => 'Magnet Bank',
-            'financialTypeId' => 1,
-            'paymentInstrumentId' => 5,
-            'bankAccountNumberParameter' => 'bank.bank_account_number',
-            'onlyIncome' => 1,
+            'financial_type_id' => 1,
+            'payment_instrument_id' => 5,
+            'bank_account_custom_field' => 'bank.bank_account_number',
+            'only_income' => 1,
         ]);
 
         self::assertSame([

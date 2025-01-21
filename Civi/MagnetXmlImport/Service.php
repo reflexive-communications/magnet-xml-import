@@ -53,7 +53,7 @@ class Service
             $contact_data = [
                 'contact_type' => 'Individual',
                 'display_name' => (string)$transaction->Ellenpartner,
-                $this->config['bankAccountNumberParameter'] => (string)$transaction->Ellenszamla,
+                $this->config['bank_account_custom_field'] => (string)$transaction->Ellenszamla,
             ];
             $contribution_data = [
                 'trxn_id' => (string)$transaction->Tranzakcioszam,
@@ -61,13 +61,13 @@ class Service
                 'currency' => (string)$transaction->Osszeg->attributes()['Devizanem'],
                 'receive_date' => str_replace('.', '', (string)$transaction->Esedekessegnap), // we need 20150131
                 'source' => $this->config['source'],
-                'financial_type_id' => $this->config['financialTypeId'],
-                'payment_instrument_id' => $this->config['paymentInstrumentId'],
+                'financial_type_id' => $this->config['financial_type_id'],
+                'payment_instrument_id' => $this->config['payment_instrument_id'],
                 'contribution_status_id:name' => 'Completed',
             ];
 
             // Skip negative transactions (if only incomes are required)
-            if ($this->config['onlyIncome'] && $contribution_data['total_amount'] < 0.01) {
+            if ($this->config['only_income'] && $contribution_data['total_amount'] < 0.01) {
                 $stats['skipped']++;
                 continue;
             }
@@ -110,7 +110,7 @@ class Service
         $contact = Get::entitySingle('Contact', [
             'select' => ['id'],
             'where' => [
-                [$this->config['bankAccountNumberParameter'], '=', $contact_data[$this->config['bankAccountNumberParameter']]],
+                [$this->config['bank_account_custom_field'], '=', $contact_data[$this->config['bank_account_custom_field']]],
                 ['is_deleted', '=', false],
             ],
             'limit' => 1,
@@ -120,15 +120,15 @@ class Service
         }
 
         // Not found. Some bank account nos are in IBAN, others are in hungarian format, let's try to convert
-        if (preg_match('/\d{8}-\d{8}-\d{8}/', $contact_data[$this->config['bankAccountNumberParameter']])) {
-            $accountNumber = str_replace('-', '', $contact_data[$this->config['bankAccountNumberParameter']]);
+        if (preg_match('/\d{8}-\d{8}-\d{8}/', $contact_data[$this->config['bank_account_custom_field']])) {
+            $accountNumber = str_replace('-', '', $contact_data[$this->config['bank_account_custom_field']]);
             // format '1111 2222 3333 4444 5555 6666'
             $partialIban = trim(chunk_split($accountNumber, 4, ' '));
 
             $contact = Get::entitySingle('Contact', [
                 'select' => ['id'],
                 'where' => [
-                    [$this->config['bankAccountNumberParameter'], 'LIKE', "%{$partialIban}%"],
+                    [$this->config['bank_account_custom_field'], 'LIKE', "%{$partialIban}%"],
                     ['is_deleted', '=', false],
                 ],
                 'limit' => 1,
