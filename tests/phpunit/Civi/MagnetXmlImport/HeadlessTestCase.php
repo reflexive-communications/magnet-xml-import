@@ -2,6 +2,7 @@
 
 namespace Civi\MagnetXmlImport;
 
+use Civi\RcBase\ApiWrapper\Create;
 use Civi\Test;
 use Civi\Test\HeadlessInterface;
 use PHPUnit\Framework\TestCase;
@@ -16,6 +17,7 @@ class HeadlessTestCase extends TestCase implements HeadlessInterface
      * create a clean DB before running tests
      *
      * @throws \CRM_Extension_Exception_ParseException
+     * @throws \Civi\RcBase\Exception\APIException
      */
     public static function setUpBeforeClass(): void
     {
@@ -24,6 +26,10 @@ class HeadlessTestCase extends TestCase implements HeadlessInterface
             ->install('rc-base')
             ->installMe(__DIR__)
             ->apply(true);
+
+        // Create custom group and field
+        $custom_group_id = Create::entity('CustomGroup', ['title' => 'bank', 'extends' => 'Contact']);
+        Create::entity('CustomField', ['custom_group_id' => $custom_group_id, 'label' => 'bank_account_number', 'html_type' => 'Text']);
     }
 
     /**
