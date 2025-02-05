@@ -1,7 +1,5 @@
 <?php
 
-use Civi\Api4\CustomField;
-use Civi\Api4\CustomGroup;
 use Civi\MagnetXmlImport\HeadlessTestCase;
 use CRM_MagnetXmlImport_ExtensionUtil as E;
 
@@ -12,129 +10,93 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImportTest extends HeadlessTestCase
 {
     /**
      * @return void
-     */
-    public function testPreProcess()
-    {
-        $form = new CRM_MagnetXmlImport_Form_MagnetXMLImport();
-        self::assertEmpty($form->preProcess(), 'PreProcess supposed to be empty.');
-    }
-
-    /**
-     * @return void
-     */
-    public function testSetDefaultValues()
-    {
-        $form = new CRM_MagnetXmlImport_Form_MagnetXMLImport();
-        self::assertEmpty($form->preProcess(), 'PreProcess supposed to be empty.');
-        $expectedConfig = [
-            'source' => 'Magnet Bank',
-            'financialTypeId' => 1,
-            'paymentInstrumentId' => 5,
-            'bankAccountNumberParameter' => 'custom_1',
-            'onlyIncome' => 1,
-        ];
-        self::assertSame($expectedConfig, $form->setDefaultValues());
-    }
-
-    /**
-     * @return void
-     * @throws \API_Exception
      * @throws \CRM_Core_Exception
-     * @throws \Civi\API\Exception\UnauthorizedException
      */
-    public function testBuildQuickForm()
-    {
-        $customGroup = CustomGroup::create(false)
-            ->addValue('title', 'TestCustomGroup')
-            ->addValue('extends', 'Contact')
-            ->addValue('is_active', true)
-            ->execute()
-            ->first();
-        CustomField::create()
-            ->addValue('custom_group_id', $customGroup['id'])
-            ->addValue('label', 'bank account number')
-            ->addValue('data_type', 'String')
-            ->addValue('html_type', 'Text')
-            ->execute();
-        $form = new CRM_MagnetXmlImport_Form_MagnetXMLImport();
-        $form->setVar('_gid', null);
-        self::assertEmpty($form->preProcess(), 'PreProcess supposed to be empty.');
-        self::assertEmpty($form->buildQuickForm());
-    }
-
-    /**
-     * @return void
-     */
-    public function testAddRules()
+    public function testBuildForm()
     {
         $form = new CRM_MagnetXmlImport_Form_MagnetXMLImport();
-        self::assertEmpty($form->preProcess(), 'PreProcess supposed to be empty.');
-        self::assertEmpty($form->addRules());
+        $form->controller = new CRM_Core_Controller();
+
+        $form->buildQuickForm();
+        $defaults = $form->setDefaultValues();
+
+        // Check defaults
+        self::assertSame('Magnet Bank', $defaults['source'], 'Wrong default value for "source"');
+        self::assertTrue($defaults['only_income'], 'Wrong default value for "only_income"');
+
+        // Check render
+        $wrapper = new CRM_Utils_Wrapper();
+        self::expectOutputRegex('/<div class="help">Import contributions from Magnet Bank XML reports/');
+        $wrapper->run('CRM_MagnetXmlImport_Form_MagnetXMLImport');
     }
 
     /**
      * @return void
      */
-    public function testFileExtensionValidFile()
+    public function testValidateWithCorrectValues()
     {
-        $fileData = [
-            'importSource' => [
-                'type' => 'text/xml',
-            ],
-        ];
-        $result = CRM_MagnetXmlImport_Form_MagnetXMLImport::fileExtension([], $fileData);
-        self::assertTrue($result);
-    }
-
-    /**
-     * @return void
-     */
-    public function testFileExtensionNotValidFile()
-    {
-        $fileData = [
-            'importSource' => [
-                'type' => 'text/notxml',
-            ],
-        ];
-        $result = CRM_MagnetXmlImport_Form_MagnetXMLImport::fileExtension([], $fileData);
-        self::assertTrue(array_key_exists('importSource', $result));
-    }
-
-    /**
-     * PostProcess test case.
-     */
-    public function testPostProcess()
-    {
-        $customGroup = CustomGroup::create(false)
-            ->addValue('title', 'TestCustomGroupPostProcess')
-            ->addValue('extends', 'Contact')
-            ->addValue('is_active', true)
-            ->execute()
-            ->first();
-        CustomField::create()
-            ->addValue('custom_group_id', $customGroup['id'])
-            ->addValue('label', 'bank account number')
-            ->addValue('data_type', 'String')
-            ->addValue('html_type', 'Text')
-            ->addValue('text_length', 40)
-            ->execute();
-        $submitValues = [
-            'source' => 'Magnet Bank',
-            'financialTypeId' => 1,
-            'paymentInstrumentId' => 5,
-            'bankAccountNumberParameter' => 'custom_1',
-            'onlyIncome' => 1,
-        ];
-        $submitFiles = [
-            'importSource' => [
-                'type' => 'text/notxml',
+        $form = new CRM_MagnetXmlImport_Form_MagnetXMLImport();
+        $form->_submitFiles = [
+            'import_file' => [
+                'type' => 'application/xml',
                 'tmp_name' => E::path('tests/phpunit/Civi/MagnetXmlImport/sampleData.xml'),
             ],
         ];
+        $form->_flagSubmitted = true;
+        $form->addRules();
+
+        self::assertTrue($form->validate());
+    }
+
+    /**
+     * @return void
+     */
+    public function testValidateWithInvalidFileExtension()
+    {
         $form = new CRM_MagnetXmlImport_Form_MagnetXMLImport();
-        $form->setVar('_submitValues', $submitValues);
-        $form->setVar('_submitFiles', $submitFiles);
-        self::assertEmpty($form->preProcess(), 'PreProcess supposed to be empty.');
-        self::assertEmpty($form->postProcess(), 'PostProcess supposed to be empty.');
+        $form->_submitFiles = [
+            'import_file' => [
+                'type' => 'text/csv',
+                'tmp_name' => E::path('tests/phpunit/Civi/MagnetXmlImport/sampleData.csv'),
+            ],
+        ];
+        $form->_flagSubmitted = true;
+        $form->addRules();
+
+        self::assertFalse($form->validate());
+    }
+
+    /**
+     * @return void
+     * @throws \CRM_Core_Exception
+     * @throws \Civi\RcBase\Exception\InvalidArgumentException
+     */
+    public function testPostProcess()
+    {
+        $values = [
+            'source' => 'Magnet Bank',
+            'financial_type_id' => 1,
+            'payment_instrument_id' => 5,
+            'bank_account_custom_field' => 'bank.bank_account_number',
+            'only_income' => 1,
+        ];
+        $files = [
+            'import_file' => [
+                'type' => 'application/xml',
+                'tmp_name' => E::path('tests/phpunit/Civi/MagnetXmlImport/sampleData.xml'),
+            ],
+        ];
+
+        $form = new CRM_MagnetXmlImport_Form_MagnetXMLImport();
+        $form->controller = new CRM_Core_Controller();
+        $form->buildQuickForm();
+
+        $form->_submitValues = $values;
+        $form->_submitFiles = $files;
+        $form->postProcess();
+
+        $session = CRM_Core_Session::singleton()->getStatus();
+        self::assertCount(1, $session, 'Wrong number of messages');
+        self::assertStringStartsWith('The import has been finished. Results:', $session[0]['text'], 'Wrong message');
     }
 }

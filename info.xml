@@ -22,21 +22,25 @@
         <url desc="Support">https://github.com/reflexive-communications/magnet-xml-import/issues</url>
         <url desc="Licensing">https://www.gnu.org/licenses/agpl-3.0.html</url>
     </urls>
-    <releaseDate>2023-04-07</releaseDate>
-    <version>2.0.0</version>
+    <releaseDate>2025-02-05</releaseDate>
+    <version>2.1.0</version>
     <develStage>stable</develStage>
     <compatibility>
-        <ver>5.37</ver>
+        <ver>5.76</ver>
     </compatibility>
+    <requires>
+        <ext>rc-base</ext>
+    </requires>
     <classloader>
         <psr0 prefix="CRM_" path=""/>
         <psr4 prefix="Civi\" path="Civi"/>
     </classloader>
     <mixins>
-        <mixin>menu-xml@1.0.0</mixin>
+        <mixin>menu-xml@1</mixin>
+        <mixin>smarty@1</mixin>
     </mixins>
     <civix>
         <namespace>CRM/MagnetXmlImport</namespace>
-        <format>22.12.1</format>
+        <format>24.09.1</format>
     </civix>
 </extension>
