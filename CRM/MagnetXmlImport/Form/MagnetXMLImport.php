@@ -138,7 +138,7 @@ class CRM_MagnetXmlImport_Form_MagnetXMLImport extends CRM_Core_Form
             if ($index === 'errors') {
                 continue;
             }
-            $msgHtml .= "<li>${index}: {$value}</li>";
+            $msgHtml .= "<li>{$index}: {$value}</li>";
         }
         foreach ($stats['errors'] as $e) {
             $msgHtml .= "<li>{$e}</li>";
