@@ -16,15 +16,13 @@ class HeadlessTestCase extends TestCase implements HeadlessInterface
      * Apply a forced rebuild of DB, thus
      * create a clean DB before running tests
      *
-     * @throws \CRM_Extension_Exception_ParseException
      * @throws \Civi\RcBase\Exception\APIException
      */
     public static function setUpBeforeClass(): void
     {
         // Resets DB
         Test::headless()
-            ->install('rc-base')
-            ->installMe(__DIR__)
+            ->install(['rc-base', 'magnet-xml-import'])
             ->apply(true);
 
         // Create custom group and field
